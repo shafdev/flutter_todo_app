@@ -17,6 +17,7 @@ class _LargeHomePageState extends State<LargeHomePage> {
     'C',
     'D',
   ];
+  // final List<String> entries = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -36,33 +37,42 @@ class _LargeHomePageState extends State<LargeHomePage> {
         }
       },
       child: Scaffold(
+        //added to stop the overflow of TextField
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                child: Column(
-                  children: <Widget>[
-                    const TaskHeading(),
-                    ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding: EdgeInsets.all(10),
-                      itemCount: entries.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return TodoCard(
-                          ///delete button
-                          onPress: () {
-                            context.read<TodoBloc>().add(
-                                  TodoDelEvent(
-                                      index: index, dateTime: DateTime.now()),
-                                );
-                          },
-                          entries: entries,
-                          index: index,
-                        );
-                      },
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  // shrinkWrap: true
+                  child: Column(
+                    children: <Widget>[
+                      const TaskHeading(),
+                      ListView.builder(
+                        // controller: ScrollController(),
+                        physics: ScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.all(10),
+                        itemCount: entries.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return TodoCard(
+                            ///delete button
+                            onPress: () {
+                              context.read<TodoBloc>().add(
+                                    TodoDelEvent(
+                                        index: index, dateTime: DateTime.now()),
+                                  );
+                            },
+                            entries: entries,
+                            index: index,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(child: AddTaskPage()),
@@ -110,9 +120,13 @@ class TodoCard extends StatelessWidget {
         Expanded(
           child: Container(
             // height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.0),
+              color: const Color.fromARGB(255, 31, 115, 121),
+            ),
             margin: const EdgeInsets.all(10),
             // color: Colors.amber[colorCodes[index]],
-            color: const Color.fromARGB(255, 31, 115, 121),
+            // constraints: ,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Center(child: Text('Task : ${entries[index]}')),
@@ -122,8 +136,8 @@ class TodoCard extends StatelessWidget {
         GestureDetector(
             onTap: onPress,
             child: const Icon(
-              Icons.close,
-              size: 40,
+              Icons.delete,
+              size: 35,
             )),
       ],
     );

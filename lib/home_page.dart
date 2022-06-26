@@ -95,9 +95,9 @@ class TodoCard extends StatelessWidget {
         Expanded(
           child: Container(
             // height: 50,
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             // color: Colors.amber[colorCodes[index]],
-            color: Colors.amber,
+            color: const Color.fromARGB(255, 31, 115, 121),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Center(child: Text('Task : ${entries[index]}')),

@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_proj_1/todo_bloc.dart';
@@ -20,7 +22,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: LargeHomePage(),
+      home: DisplayHomePage(),
     );
+  }
+}
+
+class DisplayHomePage extends StatelessWidget {
+  const DisplayHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var window = MediaQuery.of(context).size;
+    print(window.width);
+    if (window.width < 700.0) {
+      return HomePage();
+    } else {
+      return LargeHomePage();
+    }
   }
 }

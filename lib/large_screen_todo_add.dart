@@ -20,13 +20,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
           // Navigator.pop(context);
         }
       },
+      // child: SingleChildScrollView(
+      // physics: NeverScrollableScrollPhysics(),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(5, 80, 25, 0),
+              padding: const EdgeInsets.fromLTRB(5, 30, 25, 0),
               child: TextField(
                 controller: addController,
                 style: const TextStyle(
@@ -60,9 +62,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 //clearing the textfield
                 addController.clear();
               },
-              child: Text('Add Task')),
+              child: const Text(
+                'Add Task',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color.fromARGB(255, 31, 115, 121),
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
         ],
       ),
+      // ),
     );
   }
 }
